@@ -26,7 +26,11 @@ public class ForTouchImage : MonoBehaviour {
                 set = 0;
         }
 
-        if(Input.touchCount > 0)
+        if (Input.GetMouseButton(0))
+        {
+            SceneManager.LoadScene("Game");
+        }
+        /*if(Input.touchCount > 0) //此為手機版本
         {
             Touch touch = Input.GetTouch(0);
 
@@ -47,6 +51,6 @@ public class ForTouchImage : MonoBehaviour {
                     SceneManager.LoadScene("Game");
                     break;
             }
-        }
+        }*/
     }
 }

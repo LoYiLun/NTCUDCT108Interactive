@@ -17,21 +17,21 @@ public class PlayerController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if(transform.position.x < -4.5f)
+        if(transform.position.x < -7f)
         {
             transform.position += new Vector3(0.05f, 0, 0);
         }
-        if(transform.position.x >= -4.5f)
+        if(transform.position.x >= -7f)
         {
             StartGame();
         }
         if(transform.position.y >= 4.3f)
         {
-            transform.position = new Vector2(-4.5f,4.3f);
+            transform.position = new Vector2(-7f,4.3f);
         }
         if (transform.position.y <= -4.3f)
         {
-            transform.position = new Vector2(-4.5f, -4.3f);
+            transform.position = new Vector2(-7f, -4.3f);
         }
         if(Score >= 10)
         {
@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour {
 
     void StartGame()
     {
-        if (Input.touchCount > 0)
+        transform.position = new Vector2(-7f, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        /*if (Input.touchCount > 0) //此為手機版本
         {
             Touch touch = Input.GetTouch(0);
 
@@ -68,7 +69,7 @@ public class PlayerController : MonoBehaviour {
                     
                     break;
             }
-        }
+        }*/
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
