@@ -6,6 +6,7 @@ TagManager:
   tags:
   - QuickButton
   - Obstacle
+  - Music
   layers:
   - Default
   - TransparentFX

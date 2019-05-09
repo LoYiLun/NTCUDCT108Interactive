@@ -26,7 +26,7 @@ public class ForTouchImage : MonoBehaviour {
                 set = 0;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0)|| Input.GetMouseButton(1))
         {
             SceneManager.LoadScene("Game");
         }

@@ -5,14 +5,27 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
     private Vector2 PlayerinitPos;
     private float deltaY;
+    private bool BSD;
+    static public int Hp;
     static public int Score;
-    public GameObject S1,S2,S3,B1;
+    static public bool HitX;
+    public GameObject S1,B1,life1,life2,life3;
+    private AudioSource EatQuickButton, HitObstacle, ChangeType, FinalType;
     // Use this for initialization
     void Start () {
+        EatQuickButton = GameObject.Find("吃到快捷鍵").GetComponent<AudioSource>();
+        HitObstacle = GameObject.Find("撞到障礙物").GetComponent<AudioSource>();
+        ChangeType = GameObject.Find("變換型態").GetComponent<AudioSource>();
+        FinalType = GameObject.Find("最終型態").GetComponent<AudioSource>();
         PlayerinitPos = new Vector2(-10, 0);
         transform.position = PlayerinitPos;
         Score = 0;
-
+        Hp = 3;
+        life1.SetActive(true);
+        life2.SetActive(true);
+        life3.SetActive(true);
+        HitX = false;
+        BSD = false;
     }
 	
 	// Update is called once per frame
@@ -33,15 +46,46 @@ public class PlayerController : MonoBehaviour {
         {
             transform.position = new Vector2(-7f, -4.3f);
         }
-        if(Score >= 10)
+        if(Score >= 10 || Hp == 0)
         {
             S1.SetActive(false);
-            S2.SetActive(false);
-            S3.SetActive(false);
             B1.SetActive(true);
-            this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/Player_02");
+            if(Score >= 10)
+            {
+                this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/Player_02");
+            }
+            else if(Hp == 0)
+            {
+                Destroy(gameObject);
+            }
+                
             //Time.timeScale = 0;
         }
+        switch (Hp)
+        {
+            case 1:
+                {
+                    life1.SetActive(true);
+                    life2.SetActive(false);
+                    life3.SetActive(false);
+                    break;
+                }
+            case 2:
+                {
+                    life1.SetActive(true);
+                    life2.SetActive(true);
+                    life3.SetActive(false);
+                    break;
+                }
+            case 3:
+                {
+                    life1.SetActive(true);
+                    life2.SetActive(true);
+                    life3.SetActive(true);
+                    break;
+                }
+        }
+        
     }
 
     void StartGame()
@@ -76,9 +120,61 @@ public class PlayerController : MonoBehaviour {
     {
         if(collision.tag == "QuickButton")
         {
+            if(Score < 9)
+            {
+                EatQuickButton.Play();
+            }
+            else if (Score == 9)
+            {
+                FinalType.Play();
+            }
+            if (collision.gameObject.name == "QuickButton_x(Clone)")
+            {
+                HitX = true;
+                Invoke("SetHitX", 1);
+            }
+            else if (collision.gameObject.name == "QuickButton_+(Clone)")
+            {
+                transform.localScale += new Vector3(0.05f,0.05f,0.05f);
+            }
+            else if (collision.gameObject.name == "QuickButton_-(Clone)")
+            {
+                transform.localScale -= new Vector3(0.05f, 0.05f, 0.05f);
+            }
+            else if (collision.gameObject.name == "QuickButton_s(Clone)")
+            {
+                Score = Score + 10;
+                FinalType.Play();
+            }
+            else if (collision.gameObject.name == "QuickButton_c(Clone)")
+            {
+                BSD = true;
+                Invoke("ButtonScoreDouble", 1);
+            }
             Destroy(collision.gameObject);
-            Score ++;
+            if (BSD)
+            {
+                Score = Score + 2;
+            }
+            else
+            {
+                Score++;
+            }
+            
+        }
+        if(collision.tag == "Obstacle")
+        {
+            HitObstacle.Play();
+            Hp--;
         }
             
+    }
+    void SetHitX()
+    {
+        HitX = false;
+    }
+    void ButtonScoreDouble()
+    {
+        BSD = false;
     }
 }

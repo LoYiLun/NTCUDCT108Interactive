@@ -6,7 +6,6 @@ using UnityEngine.Events;
 public class RandomCreate : MonoBehaviour {
     private int CreateIntForQuickButton;
     private int CreateIntForObstacle;
-    private int ObstacleType;
     private int QuickButtonType;
 
     private Vector3 ForCreatePos1;// 1~5是給快捷鍵
@@ -26,7 +25,7 @@ public class RandomCreate : MonoBehaviour {
         ForCreatePos6 = new Vector3(12,-2.6f,0);
         ForCreatePos7 = new Vector3(12,3.3f,0);
         InvokeRepeating("CreateQuickButton", 2, 1);
-        InvokeRepeating("CreateObstacle", 2, 2);
+        InvokeRepeating("CreateObstacle", 2, 0.5f);
     }
 	
 	// Update is called once per frame
@@ -36,35 +35,186 @@ public class RandomCreate : MonoBehaviour {
 
     void CreateQuickButton()
     {
-        CreateIntForQuickButton = Random.Range(1, 50);
+        CreateIntForQuickButton = Random.Range(1, 30);
+        QuickButtonType = Random.Range(1, 100);
         if (CreateIntForQuickButton == 1)
         {
-            GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_01")) as GameObject;
-            CreateForQuickButton.transform.position = ForCreatePos1;
+            switch (QuickButtonType % 5)
+            {
+                case 1:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_-")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos1;
+                        break;
+                    }
+                case 2:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_+")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos1;
+                        break;
+                    }
+                case 3:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_c")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos1;
+                        break;
+                    }
+                case 4:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_x")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos1;
+                        break;
+                    }
+            }
+            if(QuickButtonType == 50)
+            {
+                GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_s")) as GameObject;
+                CreateForQuickButton.transform.position = ForCreatePos1;
+            }
             CreateIntForQuickButton = 0;
         }
         else if (CreateIntForQuickButton == 2)
         {
-            GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_01")) as GameObject;
-            CreateForQuickButton.transform.position = ForCreatePos2;
+            switch (QuickButtonType % 5)
+            {
+                case 1:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_-")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos2;
+                        break;
+                    }
+                case 2:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_+")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos2;
+                        break;
+                    }
+                case 3:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_c")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos2;
+                        break;
+                    }
+                case 4:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_x")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos2;
+                        break;
+                    }
+            }
+            if (QuickButtonType == 50)
+            {
+                GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_s")) as GameObject;
+                CreateForQuickButton.transform.position = ForCreatePos2;
+            }
             CreateIntForQuickButton = 0;
         }
         else if(CreateIntForQuickButton == 3)
         {
-            GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_01")) as GameObject;
-            CreateForQuickButton.transform.position = ForCreatePos3;
+            switch (QuickButtonType % 5)
+            {
+                case 1:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_-")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos3;
+                        break;
+                    }
+                case 2:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_+")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos3;
+                        break;
+                    }
+                case 3:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_c")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos3;
+                        break;
+                    }
+                case 4:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_x")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos3;
+                        break;
+                    }
+            }
+            if (QuickButtonType == 50)
+            {
+                GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_s")) as GameObject;
+                CreateForQuickButton.transform.position = ForCreatePos3;
+            }
             CreateIntForQuickButton = 0;
         }
         else if (CreateIntForQuickButton == 4)
         {
-            GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_01")) as GameObject;
-            CreateForQuickButton.transform.position = ForCreatePos4;
+            switch (QuickButtonType % 5)
+            {
+                case 1:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_-")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos4;
+                        break;
+                    }
+                case 2:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_+")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos4;
+                        break;
+                    }
+                case 3:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_c")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos4;
+                        break;
+                    }
+                case 4:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_x")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos4;
+                        break;
+                    }
+            }
+            if (QuickButtonType == 50)
+            {
+                GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_s")) as GameObject;
+                CreateForQuickButton.transform.position = ForCreatePos4;
+            }
             CreateIntForQuickButton = 0;
         }
         else if (CreateIntForQuickButton == 5)
         {
-            GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_01")) as GameObject;
-            CreateForQuickButton.transform.position = ForCreatePos5;
+            switch (QuickButtonType % 5)
+            {
+                case 1:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_-")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos5;
+                        break;
+                    }
+                case 2:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_+")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos5;
+                        break;
+                    }
+                case 3:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_c")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos5;
+                        break;
+                    }
+                case 4:
+                    {
+                        GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_x")) as GameObject;
+                        CreateForQuickButton.transform.position = ForCreatePos5;
+                        break;
+                    }
+            }
+            if (QuickButtonType == 50)
+            {
+                GameObject CreateForQuickButton = Instantiate(Resources.Load("Prefabs/QuickButton_s")) as GameObject;
+                CreateForQuickButton.transform.position = ForCreatePos5;
+            }
             CreateIntForQuickButton = 0;
         }
         /*else
@@ -75,7 +225,7 @@ public class RandomCreate : MonoBehaviour {
 
     void CreateObstacle()
     {
-        CreateIntForObstacle = Random.Range(1, 10);
+        CreateIntForObstacle = Random.Range(1, 5);
         if(CreateIntForObstacle  == 1)
         {
             GameObject CreateForObstacle = Instantiate(Resources.Load("Prefabs/障礙物_塔")) as GameObject;
