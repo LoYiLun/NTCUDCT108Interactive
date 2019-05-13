@@ -30,6 +30,10 @@ public class ForTouchImage : MonoBehaviour {
         {
             SceneManager.LoadScene("Game");
         }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
         /*if(Input.touchCount > 0) //此為手機版本
         {
             Touch touch = Input.GetTouch(0);

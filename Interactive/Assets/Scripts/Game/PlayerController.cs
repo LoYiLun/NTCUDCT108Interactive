@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour {
     private Vector2 PlayerinitPos;
@@ -11,6 +13,8 @@ public class PlayerController : MonoBehaviour {
     static public bool HitX;
     public GameObject S1,B1,life1,life2,life3;
     private AudioSource EatQuickButton, HitObstacle, ChangeType, FinalType;
+    public GameObject White;
+    public GameObject Music;
     // Use this for initialization
     void Start () {
         EatQuickButton = GameObject.Find("吃到快捷鍵").GetComponent<AudioSource>();
@@ -48,14 +52,24 @@ public class PlayerController : MonoBehaviour {
         }
         if(Score >= 10 || Hp == 0)
         {
+            HitX = true;
             S1.SetActive(false);
-            B1.SetActive(true);
+            
             if(Score >= 10)
             {
                 this.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Images/Player_02");
+                transform.position = Vector3.Lerp(transform.position, new Vector3(10,transform.position.y,0), 0.01f);
+                White.SetActive(true);
+                White.GetComponent<Image>().color += new Color(0, 0, 0, 0.01f);
+                Music.GetComponent<AudioSource>().volume--;
+                Invoke("PlayVideo", 1);
             }
             else if(Hp == 0)
             {
+                B1.SetActive(true);
+                life1.SetActive(false);
+                life2.SetActive(false);
+                life3.SetActive(false);
                 Destroy(gameObject);
             }
                 
@@ -90,7 +104,23 @@ public class PlayerController : MonoBehaviour {
 
     void StartGame()
     {
-        transform.position = new Vector2(-7f, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+        if(Score < 10)
+        {
+            
+            if (Input.GetKey(KeyCode.UpArrow)|| Input.GetKey(KeyCode.W))
+            {
+                transform.position += new Vector3(0, 0.2f, 0);
+            }
+            else if (Input.GetKey(KeyCode.DownArrow)|| Input.GetKey(KeyCode.S))
+            {
+                transform.position -= new Vector3(0, 0.2f, 0);
+            }
+            else if(Input.GetAxis("Mouse Y") < 0 || Input.GetAxis("Mouse Y") > 0)
+            {
+                transform.position = new Vector2(-7f, Camera.main.ScreenToWorldPoint(Input.mousePosition).y);
+            }
+        }
+            
         /*if (Input.touchCount > 0) //此為手機版本
         {
             Touch touch = Input.GetTouch(0);
@@ -176,5 +206,9 @@ public class PlayerController : MonoBehaviour {
     void ButtonScoreDouble()
     {
         BSD = false;
+    }
+    void PlayVideo()
+    {
+        SceneManager.LoadScene("Video");
     }
 }
